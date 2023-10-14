@@ -9,7 +9,13 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class Controls implements KeyboardHandler {
 
 
-    public Controls() {
+    private Player player;
+    private Background background;
+
+    public Controls(Background background, Player player) {
+
+        this.player = player;
+        this.background = background;
         init();
     }
 
@@ -76,12 +82,16 @@ public class Controls implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
+                player.moveRight();
                 break;
             case KeyboardEvent.KEY_LEFT:
+                player.moveLeft();
                 break;
             case KeyboardEvent.KEY_UP:
+                player.moveUp();
                 break;
             case KeyboardEvent.KEY_DOWN:
+                player.moveDown();
                 break;
             case KeyboardEvent.KEY_O:
                 break;
