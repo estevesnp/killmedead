@@ -19,12 +19,4 @@ public class Player {
         picture.translate(-speed, 0);
     }
 
-    public void moveUp() {
-        picture.translate(0, -speed);
-    }
-
-    public void moveDown() {
-        picture.translate(0, speed);
-    }
-
 }
