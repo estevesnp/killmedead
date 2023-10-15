@@ -88,10 +88,8 @@ public class Controls implements KeyboardHandler {
                 player.moveLeft();
                 break;
             case KeyboardEvent.KEY_UP:
-                player.moveUp();
                 break;
             case KeyboardEvent.KEY_DOWN:
-                player.moveDown();
                 break;
             case KeyboardEvent.KEY_O:
                 break;
