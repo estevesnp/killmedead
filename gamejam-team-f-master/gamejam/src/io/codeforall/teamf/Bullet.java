@@ -10,7 +10,7 @@ public class Bullet {
     private final int SPEED = 2;
 
     public Bullet(int x, int y, Player player, Background background) {
-        picture = new Picture(x, y, "resources/bullet.png");
+        picture = new Picture(x, y, "gamejam/resources/bullet.png");
         picture.translate(0, -picture.getHeight());
         picture.draw();
 

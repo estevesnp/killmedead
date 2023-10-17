@@ -4,6 +4,7 @@ public class Game {
 
     private Background background;
     private Player player;
+    private Ball ball;
 
 
     public Game() {
@@ -13,6 +14,8 @@ public class Game {
         background = new Background();
         background.show();
         player = new Player(background);
+        ball = new Ball(background);
+
     }
 
     public void start() throws InterruptedException {
@@ -20,6 +23,7 @@ public class Game {
         while (true) {
 
             Thread.sleep(1);
+
             updateMovement();
 
         }
@@ -28,6 +32,8 @@ public class Game {
     private void updateMovement() {
         player.move();
         player.getBullet().move();
+        ball.moveBall();
+
     }
 
 

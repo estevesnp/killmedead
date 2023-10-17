@@ -11,8 +11,8 @@ public class Player implements KeyboardHandler {
     private Background background;
     private Bullet bullet = new Bullet(0,0, this, new Background());
     private PlayerDirection playerDirection = PlayerDirection.RIGHT;
-    private String picRight = "resources/mario.png";
-    private String picLeft = "resources/mario_reversed.png";
+    private String picRight = "gamejam/resources/mario.png";
+    private String picLeft = "gamejam/resources/mario_reversed.png";
 
     private boolean lookingRight = true;
     private boolean isMoving = false;
@@ -26,7 +26,6 @@ public class Player implements KeyboardHandler {
     public Player(Background background) {
 
         this.background = background;
-
         init();
     }
 
