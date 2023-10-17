@@ -17,6 +17,7 @@ public class Player implements KeyboardHandler {
     private boolean lookingRight = true;
     private boolean isMoving = false;
     private boolean isShooting = false;
+    private boolean spaceIsHeld = false;
 
 
     private Picture picture;
@@ -57,6 +58,10 @@ public class Player implements KeyboardHandler {
         pressedSpace.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedSpace.setKey(KeyboardEvent.KEY_SPACE);
 
+        KeyboardEvent releasedSpace = new KeyboardEvent();
+        releasedSpace.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        releasedSpace.setKey(KeyboardEvent.KEY_SPACE);
+
 
 
         keyboard.addEventListener(pressedRight);
@@ -64,6 +69,7 @@ public class Player implements KeyboardHandler {
         keyboard.addEventListener(pressedLeft);
         keyboard.addEventListener(releasedLeft);
         keyboard.addEventListener(pressedSpace);
+        keyboard.addEventListener(releasedSpace);
 
 
     }
@@ -145,8 +151,13 @@ public class Player implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                this.shoot();
-                isShooting = true;
+                if (!spaceIsHeld) {
+                    spaceIsHeld = true;
+                    this.shoot();
+                    isShooting = true;
+                }
+
+
                 break;
 
         }
@@ -163,6 +174,8 @@ public class Player implements KeyboardHandler {
             case KeyboardEvent.KEY_LEFT:
                 this.isMoving = false;
                 break;
+            case KeyboardEvent.KEY_SPACE:
+                this.spaceIsHeld = false;
         }
     }
 
