@@ -1,10 +1,12 @@
 package io.codeforall.teamf;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
 
-        Background background = new Background();
-        Player player = new Player(background);
+        Game g = new Game();
+
+        g.init();
+        g.start();
 
     }
 

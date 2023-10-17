@@ -9,14 +9,16 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Player implements KeyboardHandler {
 
     private Background background;
+    private Bullet bullet = new Bullet(0,0, this, new Background());
     private String picRight = "resources/mario.png";
     private String picLeft = "resources/mario_reversed.png";
 
     private boolean lookingRight = true;
+    private boolean isShooting = false;
 
 
-    Picture picture;
-    private int speed = 10;
+    private Picture picture;
+    private int speed = 20;
 
     public Player(Background background) {
 
@@ -51,7 +53,7 @@ public class Player implements KeyboardHandler {
 
     }
 
-    public void moveRight() {
+    private void moveRight() {
 
         if (picture.getMaxX() != background.getMaxX()){
             if (picture.getMaxX() + speed > background.getMaxX()) {
@@ -68,7 +70,7 @@ public class Player implements KeyboardHandler {
 
     }
 
-    public void moveLeft() {
+    private void moveLeft() {
 
         if (picture.getX() != background.getX()){
             if (picture.getX() - speed < background.getX()) {
@@ -85,6 +87,25 @@ public class Player implements KeyboardHandler {
 
     }
 
+    private void shoot() {
+        if (!isShooting) {
+            bullet = new Bullet(picture.getX() + 20, picture.getY(), this, background);
+            isShooting = true;
+        }
+    }
+
+    public boolean isShooting() {
+        return isShooting;
+    }
+
+    public void setShooting(boolean bool) {
+        isShooting = bool;
+    }
+
+    public Bullet getBullet() {
+        return bullet;
+    }
+
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
@@ -99,6 +120,8 @@ public class Player implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
+                this.shoot();
+                isShooting = true;
                 break;
 
         }

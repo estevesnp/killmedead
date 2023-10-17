@@ -8,6 +8,9 @@ public class Background {
 
 
     public Background() {
+    }
+
+    public void show() {
         picture.draw();
     }
 
