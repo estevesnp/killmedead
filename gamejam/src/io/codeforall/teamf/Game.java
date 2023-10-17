@@ -20,13 +20,14 @@ public class Game {
         while (true) {
 
             Thread.sleep(1);
-
-                player.getBullet().move();
+            updateMovement();
 
         }
+    }
 
-
-
+    private void updateMovement() {
+        player.move();
+        player.getBullet().move();
     }
 
 

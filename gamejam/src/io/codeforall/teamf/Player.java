@@ -10,15 +10,17 @@ public class Player implements KeyboardHandler {
 
     private Background background;
     private Bullet bullet = new Bullet(0,0, this, new Background());
+    private PlayerDirection playerDirection = PlayerDirection.RIGHT;
     private String picRight = "resources/mario.png";
     private String picLeft = "resources/mario_reversed.png";
 
     private boolean lookingRight = true;
+    private boolean isMoving = false;
     private boolean isShooting = false;
 
 
     private Picture picture;
-    private int speed = 20;
+    private double speed = 0.5;
 
     public Player(Background background) {
 
@@ -37,17 +39,30 @@ public class Player implements KeyboardHandler {
         KeyboardEvent pressedRight = new KeyboardEvent();
         pressedRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedRight.setKey(KeyboardEvent.KEY_RIGHT);
-        keyboard.addEventListener(pressedRight);
+
+        KeyboardEvent releasedRight = new KeyboardEvent();
+        releasedRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        releasedRight.setKey(KeyboardEvent.KEY_RIGHT);
 
         KeyboardEvent pressedLeft = new KeyboardEvent();
         pressedLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedLeft.setKey(KeyboardEvent.KEY_LEFT);
-        keyboard.addEventListener(pressedLeft);
+
+        KeyboardEvent releasedLeft = new KeyboardEvent();
+        releasedLeft.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        releasedLeft.setKey(KeyboardEvent.KEY_LEFT);
 
 
         KeyboardEvent pressedSpace = new KeyboardEvent();
         pressedSpace.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedSpace.setKey(KeyboardEvent.KEY_SPACE);
+
+
+
+        keyboard.addEventListener(pressedRight);
+        keyboard.addEventListener(releasedRight);
+        keyboard.addEventListener(pressedLeft);
+        keyboard.addEventListener(releasedLeft);
         keyboard.addEventListener(pressedSpace);
 
 
@@ -62,12 +77,6 @@ public class Player implements KeyboardHandler {
                 picture.translate(speed, 0);
             }
         }
-
-        if (!lookingRight) {
-            lookingRight = true;
-            picture.load(picRight);
-        }
-
     }
 
     private void moveLeft() {
@@ -80,11 +89,18 @@ public class Player implements KeyboardHandler {
             }
         }
 
-        if (lookingRight) {
-            lookingRight = false;
-            picture.load(picLeft);
-        }
 
+    }
+
+
+    public void move() {
+        if (isMoving) {
+            if (lookingRight) {
+                moveRight();
+            } else {
+                moveLeft();
+            }
+        }
     }
 
     private void shoot() {
@@ -106,17 +122,26 @@ public class Player implements KeyboardHandler {
         return bullet;
     }
 
+
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_RIGHT:
-                this.moveRight();
+                if (!lookingRight) {
+                    lookingRight = true;
+                    picture.load(picRight);
+                }
+                this.isMoving = true;
                 break;
 
             case KeyboardEvent.KEY_LEFT:
-                this.moveLeft();
+                if (lookingRight) {
+                    lookingRight = false;
+                    picture.load(picLeft);
+                }
+                this.isMoving = true;
                 break;
 
             case KeyboardEvent.KEY_SPACE:
@@ -129,6 +154,16 @@ public class Player implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+
+        switch (keyboardEvent.getKey()) {
+
+            case KeyboardEvent.KEY_RIGHT:
+                this.isMoving = false;
+                break;
+            case KeyboardEvent.KEY_LEFT:
+                this.isMoving = false;
+                break;
+        }
     }
 
 }
