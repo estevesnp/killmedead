@@ -16,6 +16,7 @@ public class Player implements KeyboardHandler {
     private String picRight = "gamejam/resources/mario.png";
     private String picLeft = "gamejam/resources/mario_reversed.png";
 
+    private boolean isAlive = true;
     private boolean lookingRight = true;
     private boolean isMoving = false;
     private boolean isShooting = false;
@@ -109,6 +110,27 @@ public class Player implements KeyboardHandler {
                 moveLeft();
             }
         }
+        for (Ball ball : balls) {
+            if (collideWithBall(ball)) {
+                delete();
+            }
+        }
+    }
+
+    public boolean collideWithBall(Ball ball) {
+
+        int playerHitBoxX = picture.getX() + (picture.getMaxX() - picture.getX())/2;
+
+        if ((ball.getX() <= playerHitBoxX && playerHitBoxX <= ball.getMaxX()) && (ball.getY() <= picture.getY() && picture.getY() <= ball.getMaxY())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void delete() {
+        picture.delete();
+        isAlive = false;
     }
 
     private void shoot() {
@@ -153,6 +175,10 @@ public class Player implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
+                if (!isAlive) {
+                    break;
+                }
+
                 if (!spaceIsHeld) {
                     spaceIsHeld = true;
                     this.shoot();

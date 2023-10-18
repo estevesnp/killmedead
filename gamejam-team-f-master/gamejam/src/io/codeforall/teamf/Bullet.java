@@ -32,7 +32,7 @@ public class Bullet {
             if (collideWithBall(ball)) {
                 balls.remove(ball);
                 ball.delete();
-                delete();
+                this.delete();
                 break;
             }
         }
@@ -43,7 +43,7 @@ public class Bullet {
 
     public boolean collideWithBall(Ball ball) {
 
-        int bulletHitBoxX = (int) picture.getX() + (picture.getMaxX() - picture.getX())/2;
+        int bulletHitBoxX = picture.getX() + (picture.getMaxX() - picture.getX())/2;
 
         if ((ball.getX() <= bulletHitBoxX && bulletHitBoxX <= ball.getMaxX()) && (ball.getY() <= picture.getY() && picture.getY() <= ball.getMaxY())) {
             return true;
@@ -52,13 +52,9 @@ public class Bullet {
         return false;
     }
 
-
     public void delete() {
         picture.delete();
         player.setShooting(false);
     }
-
-
-
 
 }
