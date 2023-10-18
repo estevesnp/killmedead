@@ -6,10 +6,12 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.LinkedList;
+
 public class Player implements KeyboardHandler {
 
     private Background background;
-    private Ball ball;
+    private LinkedList<Ball> balls;
     private Bullet bullet;
     private String picRight = "gamejam/resources/mario.png";
     private String picLeft = "gamejam/resources/mario_reversed.png";
@@ -23,10 +25,10 @@ public class Player implements KeyboardHandler {
     private Picture picture;
     private double speed = 0.5;
 
-    public Player(Background background, Ball ball) {
+    public Player(Background background, LinkedList<Ball> balls) {
 
         this.background = background;
-        this.ball = ball;
+        this.balls = balls;
         init();
     }
 
@@ -111,7 +113,7 @@ public class Player implements KeyboardHandler {
 
     private void shoot() {
         if (!isShooting) {
-            bullet = new Bullet(picture.getX() + 20, picture.getY(), background, this, ball);
+            bullet = new Bullet(picture.getX() + 20, picture.getY(), background, this, balls);
             isShooting = true;
         }
     }

@@ -6,14 +6,21 @@ public class Ball {
 
     private Background background;
     private Picture picture;
-    private double hSpeed = 0.5;
-    private double vSpeed = 0.5;
+    private double hSpeed;
+    private double vSpeed;
 
 
-    public Ball(Background background) {
+    public Ball(Background background, double speed) {
         this.background = background;
-        picture = new Picture(0, 0, "gamejam/resources/ball.png");
+        picture = new Picture(background.getX() + 1, background.getY(), "gamejam/resources/ball.png");
         picture.draw();
+        setRandomX();
+        hSpeed = speed;
+        vSpeed = speed;
+    }
+
+    private void setRandomX() {
+        picture.translate(Math.random() * (background.getMaxX() - picture.getWidth()), 0);
     }
 
     public void move() {

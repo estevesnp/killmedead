@@ -1,20 +1,26 @@
 package io.codeforall.teamf;
 
+import java.util.LinkedList;
+
 public class Game {
 
     private Background background;
     private Player player;
-    private Ball ball;
+    private LinkedList<Ball> balls = new LinkedList<>();
 
 
     public Game() {
+
     }
 
     public void init() {
         background = new Background();
         background.show();
-        ball = new Ball(background);
-        player = new Player(background, ball);
+        balls.add(new Ball(background, 0.5));
+        balls.add(new Ball(background, 0.5));
+        balls.add(new Ball(background, 0.5));
+        balls.add(new Ball(background, 0.5));
+        player = new Player(background, balls);
     }
 
     public void start() throws InterruptedException {
@@ -33,10 +39,15 @@ public class Game {
         if (player.isShooting()) {
             player.getBullet().move();
         }
-        ball.move();
+        moveBalls();
 
     }
 
+    private void moveBalls() {
+        for (Ball ball : balls) {
+            ball.move();
+        }
+    }
 
 
 }
