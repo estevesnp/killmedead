@@ -12,7 +12,7 @@ public class Ball {
 
     public Ball(Background background, double speed) {
         this.background = background;
-        picture = new Picture(background.getX() + 1, background.getY(), "gamejam/resources/ball.png");
+        picture = new Picture(background.getX(), background.getY(), "gamejam/resources/ball.png");
         picture.draw();
         setRandomX();
         hSpeed = speed;
