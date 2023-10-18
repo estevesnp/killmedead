@@ -1,6 +1,7 @@
 package io.codeforall.teamf;
 
 import io.codeforall.teamf.Balls.Ball;
+import io.codeforall.teamf.Balls.BallType;
 
 import java.util.LinkedList;
 
@@ -18,12 +19,10 @@ public class Game {
     public void init() {
         background = new Background();
         background.show();
-        balls.add(new Ball(background, 0.5));
-        balls.add(new Ball(background, 0.5));
-        balls.add(new Ball(background, 0.5));
-        balls.add(new Ball(background, 0.5));
 
-
+        balls.add(new Ball(background, BallType.BIG));
+        balls.add(new Ball(background, BallType.BIG));
+        
         player = new Player(background, balls);
     }
 

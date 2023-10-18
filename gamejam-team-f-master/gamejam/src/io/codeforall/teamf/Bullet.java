@@ -1,6 +1,7 @@
 package io.codeforall.teamf;
 
 import io.codeforall.teamf.Balls.Ball;
+import io.codeforall.teamf.Balls.BallType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
@@ -30,6 +31,10 @@ public class Bullet {
 
         for (Ball ball : balls) {
             if (collideWithBall(ball)) {
+                if (ball.getBallType().getNextBall() != null) {
+                    balls.add(new Ball(background, ball.getBallType().getNextBall(), ball.getX(), ball.getY(), true, false));
+                    balls.add(new Ball(background, ball.getBallType().getNextBall(), ball.getX(), ball.getY(), false, false));
+                }
                 balls.remove(ball);
                 ball.delete();
                 this.delete();
