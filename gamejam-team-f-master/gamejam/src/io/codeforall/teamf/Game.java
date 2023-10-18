@@ -22,7 +22,7 @@ public class Game {
 
         balls.add(new Ball(background, BallType.BIG));
         balls.add(new Ball(background, BallType.BIG));
-        
+
         player = new Player(background, balls);
     }
 

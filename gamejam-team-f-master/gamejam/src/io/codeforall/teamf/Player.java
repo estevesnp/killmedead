@@ -35,7 +35,7 @@ public class Player implements KeyboardHandler {
     }
 
     private void init() {
-        picture = new Picture(background.getX(), background.getMaxY(), picRight);
+        picture = new Picture(background.getX() + (background.getMaxX() - background.getX())/2, background.getMaxY(), picRight);
         picture.translate(0, -picture.getHeight());
         picture.draw();
 

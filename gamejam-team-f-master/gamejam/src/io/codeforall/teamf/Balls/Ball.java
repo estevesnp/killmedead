@@ -31,10 +31,6 @@ public class Ball {
         vSpeed = ballType.getSpeed();
     }
 
-    private void chooseHorizontal(double speed, boolean startsRight) {
-        hSpeed = startsRight ? speed : -speed;
-    }
-
     private void randomizeX(double speed) {
         picture.translate(Math.random() * (background.getMaxX() - picture.getWidth()), 0);
         if (Math.random() < 0.5) {
