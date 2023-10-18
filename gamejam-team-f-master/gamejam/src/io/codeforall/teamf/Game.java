@@ -19,7 +19,6 @@ public class Game {
         balls.add(new Ball(background, 0.5));
         balls.add(new Ball(background, 0.5));
         balls.add(new Ball(background, 0.5));
-        balls.add(new Ball(background, 0.5));
         player = new Player(background, balls);
     }
 
@@ -48,6 +47,8 @@ public class Game {
             ball.move();
         }
     }
+
+
 
 
 }

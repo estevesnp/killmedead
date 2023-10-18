@@ -30,9 +30,9 @@ public class Bullet {
 
         for (Ball ball : balls) {
             if (collideWithBall(ball)) {
-                delete();
-                ball.delete();
                 balls.remove(ball);
+                ball.delete();
+                delete();
                 break;
             }
         }
