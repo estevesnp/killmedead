@@ -13,9 +13,8 @@ public class Game {
     public void init() {
         background = new Background();
         background.show();
-        player = new Player(background);
         ball = new Ball(background);
-
+        player = new Player(background, ball);
     }
 
     public void start() throws InterruptedException {
@@ -31,8 +30,10 @@ public class Game {
 
     private void updateMovement() {
         player.move();
-        player.getBullet().move();
-        ball.moveBall();
+        if (player.isShooting()) {
+            player.getBullet().move();
+        }
+        ball.move();
 
     }
 

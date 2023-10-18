@@ -9,8 +9,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Player implements KeyboardHandler {
 
     private Background background;
-    private Bullet bullet = new Bullet(0,0, this, new Background());
-    private PlayerDirection playerDirection = PlayerDirection.RIGHT;
+    private Ball ball;
+    private Bullet bullet;
     private String picRight = "gamejam/resources/mario.png";
     private String picLeft = "gamejam/resources/mario_reversed.png";
 
@@ -23,9 +23,10 @@ public class Player implements KeyboardHandler {
     private Picture picture;
     private double speed = 0.5;
 
-    public Player(Background background) {
+    public Player(Background background, Ball ball) {
 
         this.background = background;
+        this.ball = ball;
         init();
     }
 
@@ -110,7 +111,7 @@ public class Player implements KeyboardHandler {
 
     private void shoot() {
         if (!isShooting) {
-            bullet = new Bullet(picture.getX() + 20, picture.getY(), this, background);
+            bullet = new Bullet(picture.getX() + 20, picture.getY(), background, this, ball);
             isShooting = true;
         }
     }
