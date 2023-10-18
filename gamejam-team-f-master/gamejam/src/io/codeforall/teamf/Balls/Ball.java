@@ -1,5 +1,6 @@
-package io.codeforall.teamf;
+package io.codeforall.teamf.Balls;
 
+import io.codeforall.teamf.Background;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Ball {

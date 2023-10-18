@@ -1,7 +1,7 @@
 package io.codeforall.teamf;
 
+import io.codeforall.teamf.Balls.Ball;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import sun.awt.image.ImageWatched;
 
 import java.util.LinkedList;
 

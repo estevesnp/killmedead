@@ -4,7 +4,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
 
-    Picture picture = new Picture(0, 0, "gamejam/resources/background.png");
+    Picture picture = new Picture(10, 10, "gamejam/resources/background.png");
 
     public Background() {
     }

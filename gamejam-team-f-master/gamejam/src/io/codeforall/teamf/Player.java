@@ -1,5 +1,6 @@
 package io.codeforall.teamf;
 
+import io.codeforall.teamf.Balls.Ball;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -24,7 +25,7 @@ public class Player implements KeyboardHandler {
 
 
     private Picture picture;
-    private double speed = 0.5;
+    private double speed = 0.8;
 
     public Player(Background background, LinkedList<Ball> balls) {
 
@@ -65,15 +66,12 @@ public class Player implements KeyboardHandler {
         releasedSpace.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         releasedSpace.setKey(KeyboardEvent.KEY_SPACE);
 
-
-
         keyboard.addEventListener(pressedRight);
         keyboard.addEventListener(releasedRight);
         keyboard.addEventListener(pressedLeft);
         keyboard.addEventListener(releasedLeft);
         keyboard.addEventListener(pressedSpace);
         keyboard.addEventListener(releasedSpace);
-
 
     }
 
@@ -135,7 +133,7 @@ public class Player implements KeyboardHandler {
 
     private void shoot() {
         if (!isShooting) {
-            bullet = new Bullet(picture.getX() + 20, picture.getY(), background, this, balls);
+            bullet = new Bullet(picture.getX() + 20, picture.getMaxY(), background, this, balls);
             isShooting = true;
         }
     }
