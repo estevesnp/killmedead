@@ -13,6 +13,7 @@ public class Game {
     private Player player;
     private ArrayList<Ball> balls = new ArrayList<>();
     private boolean gameOver = false;
+    private int gamesPlayed = 0;
 
 
     public Game() {
@@ -20,6 +21,8 @@ public class Game {
     }
 
     public void startMenu() {
+        System.out.println("Games Played: " + gamesPlayed);
+
         menu = new Menu();
         menu.show();
 
@@ -38,7 +41,8 @@ public class Game {
         background = new Background();
         background.show();
 
-        balls.add(new Ball(background, BallType.SMALL));
+        balls.add(new Ball(background, BallType.BIG));
+        balls.add(new Ball(background, BallType.BIG));
 
         player = new Player(background, balls);
     }
@@ -68,6 +72,8 @@ public class Game {
         }
         balls.clear();
 
+        gamesPlayed++;
+
     }
 
     private void checkGameOver() {
@@ -75,7 +81,7 @@ public class Game {
         if (!player.isAlive()) {
             gameOver = true;
         }
-        
+
         if (balls.isEmpty()) {
             gameOver = true;
         }
