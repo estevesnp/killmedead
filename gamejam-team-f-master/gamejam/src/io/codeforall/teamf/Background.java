@@ -4,7 +4,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
 
-    Picture picture = new Picture(10, 10, "gamejam/resources/background.png");
+    private Picture picture = new Picture(10, 10, "gamejam/resources/background.png");
 
     public Background() {
     }
@@ -13,6 +13,9 @@ public class Background {
         picture.draw();
     }
 
+    public void delete() {
+        picture.delete();
+    }
 
     public int getX() {
         return picture.getX();

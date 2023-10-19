@@ -7,12 +7,13 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Player implements KeyboardHandler {
 
     private Background background;
-    private LinkedList<Ball> balls;
+    private ArrayList<Ball> balls;
     private Bullet bullet;
     private String picRight = "gamejam/resources/mario.png";
     private String picLeft = "gamejam/resources/mario_reversed.png";
@@ -27,7 +28,7 @@ public class Player implements KeyboardHandler {
     private Picture picture;
     private double speed = 0.8;
 
-    public Player(Background background, LinkedList<Ball> balls) {
+    public Player(Background background, ArrayList<Ball> balls) {
 
         this.background = background;
         this.balls = balls;
@@ -96,7 +97,6 @@ public class Player implements KeyboardHandler {
             }
         }
 
-
     }
 
 
@@ -117,18 +117,35 @@ public class Player implements KeyboardHandler {
 
     public boolean collideWithBall(Ball ball) {
 
-        int playerHitBoxX = picture.getX() + (picture.getMaxX() - picture.getX())/2;
+        int playerMidX = picture.getX() + picture.getWidth()/2;
+        int playerMidY = picture.getY() + picture.getHeight()/2;
 
-        if ((ball.getX() <= playerHitBoxX && playerHitBoxX <= ball.getMaxX()) && (ball.getY() <= picture.getY() && picture.getY() <= ball.getMaxY())) {
+        // Collision with head
+        if ((ball.getX() <= playerMidX && playerMidX <= ball.getMaxX()) && (ball.getY() <= picture.getY() && picture.getY() <= ball.getMaxY())) {
+            return true;
+        }
+
+        // Collision with left side
+        if ((ball.getY() <= playerMidY && playerMidY <= ball.getMaxY()) && (ball.getX() <= picture.getX() && picture.getX() <= ball.getMaxX())) {
+            return true;
+        }
+
+        // Collision with right side
+        if ((ball.getY() <= playerMidY && playerMidY <= ball.getMaxY()) && (ball.getMaxX() <= picture.getX() && picture.getMaxX() <= ball.getMaxX())) {
             return true;
         }
 
         return false;
     }
 
-    private void delete() {
+    public void delete() {
+
         picture.delete();
         isAlive = false;
+        if (bullet != null) {
+            bullet.delete();
+        }
+
     }
 
     private void shoot() {
@@ -140,6 +157,9 @@ public class Player implements KeyboardHandler {
 
     public boolean isShooting() {
         return isShooting;
+    }
+    public boolean isAlive() {
+        return isAlive;
     }
 
     public void setShooting(boolean bool) {

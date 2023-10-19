@@ -22,17 +22,20 @@ public class Ball {
         vSpeed = startsDown ? ballType.getSpeed() : -ballType.getSpeed();
     }
 
+
+    // Random ball generator
     public Ball(Background background, BallType ballType) {
         this.background = background;
         this.ballType = ballType;
-        picture = new Picture(background.getX(), background.getY() + randBallInitHeight*2, "gamejam/resources/big-ball.png");
+        picture = new Picture(background.getX(), background.getY() + randBallInitHeight*2, ballType.getPicOrigin());
         picture.draw();
         randomizeX(ballType.getSpeed());
+        hSpeed = ballType.getSpeed();
         vSpeed = ballType.getSpeed();
     }
 
     private void randomizeX(double speed) {
-        picture.translate(Math.random() * (background.getMaxX() - picture.getWidth()), 0);
+        picture.translate(1 + Math.random() * (background.getMaxX() - picture.getWidth() - 12), 0);
         if (Math.random() < 0.5) {
             hSpeed = speed;
         } else {
@@ -61,10 +64,10 @@ public class Ball {
         if (picture.getY() < randBallInitHeight) {
             vSpeed *= 0.8;
         }
-        if (picture.getY() < background.getY() || picture.getMaxY() > background.getMaxY()) {
+        if (picture.getY() < background.getY() + 1 || picture.getMaxY() > background.getMaxY() - 1) {
             vSpeed = -vSpeed;
         }
-        if (picture.getX() < background.getX() || picture.getMaxX() > background.getMaxX()) {
+        if (picture.getX() < background.getX() + 1 || picture.getMaxX() > background.getMaxX() - 1) {
             hSpeed = -hSpeed;
         }
 

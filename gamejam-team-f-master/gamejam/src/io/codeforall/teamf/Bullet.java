@@ -4,17 +4,18 @@ import io.codeforall.teamf.Balls.Ball;
 import io.codeforall.teamf.Balls.BallType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Bullet {
 
     private Background background;
     private Player player;
-    private LinkedList<Ball> balls;
+    private ArrayList<Ball> balls;
     private Picture picture;
     private final int SPEED = 2;
 
-    public Bullet(int x, int y, Background background, Player player, LinkedList<Ball> balls) {
+    public Bullet(int x, int y, Background background, Player player, ArrayList<Ball> balls) {
 
         this.background = background;
         this.player = player;
