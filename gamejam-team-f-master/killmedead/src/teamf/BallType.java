@@ -1,7 +1,7 @@
 package teamf;
 
 public enum BallType {
-    SMALL(0.8, null, "Marg.png"),
+    SMALL(0.8, null, "clau.png"),
     MEDIUM(0.65, SMALL, "Mario_ball.png"),
     BIG(0.5, MEDIUM, "Mic.png");
 

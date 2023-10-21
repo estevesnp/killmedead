@@ -11,7 +11,7 @@ public class Sound {
 
     private boolean inLoop;
 
-    Clip clip;
+    private Clip clip;
     public Sound() {
 
     }
@@ -55,6 +55,9 @@ public class Sound {
 
     public void setInLoop(Boolean loop){
         this.inLoop = loop;
+    }
+    public Clip getClip() {
+        return clip;
     }
 
 

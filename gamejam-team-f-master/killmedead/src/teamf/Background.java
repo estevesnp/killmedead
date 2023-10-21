@@ -36,5 +36,9 @@ public class Background {
         return picture.getWidth();
     }
 
+    public int getHeight() {
+        return picture.getHeight();
+    }
+
 
 }
