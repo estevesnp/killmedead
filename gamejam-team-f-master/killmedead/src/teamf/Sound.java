@@ -12,7 +12,7 @@ public class Sound {
     private boolean inLoop;
 
     Clip clip;
-    public Sound() throws LineUnavailableException {
+    public Sound() {
 
     }
 

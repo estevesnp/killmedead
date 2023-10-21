@@ -2,12 +2,12 @@ package teamf;
 
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,10 +20,11 @@ public class Game {
     private boolean gameOver = false;
     private int gamesPlayed = 0;
     private int level = 1;
+
     public static int score = 0;
-    private String startMenu = "startMenu.png";
-    private String loseMenu = "loseMenu.png";
-    private String victoryMenu = "victoryMenu.png";
+    private String startMenu = "startMenu.jpeg";
+    private String loseMenu = "loseMenu.jpeg";
+    private String victoryMenu = "winMenu.jpeg";
     private String menuPath = startMenu;
 
     private Text scoreBoard;
@@ -32,10 +33,15 @@ public class Game {
 
     private Sound loseGame = new Sound();
 
-    public Game() throws LineUnavailableException {
+    private Sound winGame = new Sound();
+
+    public Game() {
+        Rectangle rectangle = new Rectangle(10, 10, 1845, 822);
+        rectangle.fill();
     }
 
     public void startMenu() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+
 
         menu = new Menu(menuPath);
         menu.show();
@@ -57,12 +63,12 @@ public class Game {
 
 
     public void init() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
-
         background = new Background();
         background.show();
 
         scoreBoard = new Text(background.getX() + background.getWidth()/2 - 40, 50, "Score : " + score, "SansSerif", 0, 50);
         scoreBoard.setColor(Color.WHITE);
+
 
         LevelGenerator.generateLevel(level, balls, background);
 
@@ -72,15 +78,12 @@ public class Game {
 
     public void start() throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
 
-
-        // loseGame.clip.close();
-        // pressStart.clip.close();
-
         gameOver = false;
 
         scoreBoard.draw();
 
         Thread.sleep(1000);
+
 
         while (!gameOver) {
 
@@ -106,12 +109,13 @@ public class Game {
 
         themeMusic.clip.stop();
         themeMusic.clip.close();
-
     }
+
 
     private void updateScore() {
         scoreBoard.setText("Score : " + score);
     }
+
 
     private void checkGameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 //////////////////////////////////////////////////////////////////////////////
@@ -126,10 +130,12 @@ public class Game {
 
         // Win Game
         if (balls.isEmpty()) {
+            winGame.playSound("/audio/win.wav");
             gameOver = true;
             menuPath = victoryMenu;
             level++;
             score += 100;
+
         }
     }
 
@@ -147,5 +153,8 @@ public class Game {
             ball.move();
         }
     }
+
+
+
 
 }

@@ -1,7 +1,10 @@
 package teamf;
 
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.awt.*;
 import java.io.IOException;
 
 public class Main {

@@ -53,6 +53,8 @@ public class Menu implements KeyboardHandler {
                 gameStarted = true;
                 break;
             case KeyboardEvent.KEY_Q:
+                System.exit(0);
+                break;
 
         }
 

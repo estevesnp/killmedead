@@ -4,8 +4,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
 
-    private Picture picture = new Picture(10, 10, "background.jpg");
-
+    private Picture picture = new Picture(10, 10, "background.png");
     public Background() {
     }
 
@@ -36,5 +35,6 @@ public class Background {
     public int getWidth() {
         return picture.getWidth();
     }
+
 
 }
