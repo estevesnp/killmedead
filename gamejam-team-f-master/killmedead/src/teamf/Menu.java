@@ -37,11 +37,24 @@ public class Menu implements KeyboardHandler {
         pressedR.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedR.setKey(KeyboardEvent.KEY_R);
 
+        KeyboardEvent pressedQ = new KeyboardEvent();
+        pressedQ.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        pressedQ.setKey(KeyboardEvent.KEY_Q);
+
         keyboard.addEventListener(pressedR);
+        keyboard.addEventListener(pressedQ);
     }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
+
+        switch (keyboardEvent.getKey()) {
+            case KeyboardEvent.KEY_R:
+                gameStarted = true;
+                break;
+            case KeyboardEvent.KEY_Q:
+
+        }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_R) {
             gameStarted = true;

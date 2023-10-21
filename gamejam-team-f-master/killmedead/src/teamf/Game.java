@@ -78,12 +78,6 @@ public class Game {
 
         gameOver = false;
 
-
-
-
-        System.out.println("help");
-
-
         scoreBoard.draw();
 
         Thread.sleep(1000);
@@ -123,14 +117,11 @@ public class Game {
 //////////////////////////////////////////////////////////////////////////////
         // Lose Game
         if (!player.isAlive()) {
-            System.out.println("maybe?");
             loseGame.playSound("/audio/gameOver.wav");
             gameOver = true;
             menuPath = loseMenu;
             level = 1;
-            // Print score
             score = 0;
-            System.out.println("fsfs");
         }
 
         // Win Game
@@ -156,8 +147,5 @@ public class Game {
             ball.move();
         }
     }
-
-
-
 
 }
