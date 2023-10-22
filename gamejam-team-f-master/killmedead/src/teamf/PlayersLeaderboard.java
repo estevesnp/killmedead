@@ -16,7 +16,7 @@ public class PlayersLeaderboard implements Comparable<PlayersLeaderboard>{
     }
 
     public String getName() {
-        return name;
+        return "  <" + name + "_>  ";
     }
 
     @Override
@@ -26,6 +26,6 @@ public class PlayersLeaderboard implements Comparable<PlayersLeaderboard>{
 
     @Override
     public String toString() {
-        return name + ":" + score;
+        return name + "  " + score;
     }
 }

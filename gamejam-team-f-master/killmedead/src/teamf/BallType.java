@@ -30,7 +30,7 @@ public enum BallType {
             case MEDIUM:
                 return Math.random() < 0.5 ? "Marg.png" : "Mario_ball.png";
             default:
-                return Math.random() < 0.5 ? "zuka.png" : "clau.png";
+                return Math.random() < 0.5 ? "zuka.png" : "Clau.png";
         }
 
     }

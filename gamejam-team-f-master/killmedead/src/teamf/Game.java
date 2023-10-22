@@ -65,11 +65,11 @@ public class Game {
 
             case LOSE:
 
-                playerScore = new Text(background.getMaxX() - 500, 50, "YOUR SCORE: " + score, "Dialog", 0, 50);
-                playerScore.setColor(Color.WHITE);
+                playerScore = new Text(background.getMaxX() - 500, 40, "<YOUR SCORE_>  " + score, "Dialog", 0, 35);
+                playerScore.setColor(Color.LIGHT_GRAY);
                 playerScore.draw();
 
-                scoreUpdater.displayScores(40,40, 50, texts);
+                scoreUpdater.displayScores(40,40, 45, texts);
 
                 if (score > leaderboard.get(4).getScore()) {
                     setNewScore();
@@ -168,10 +168,8 @@ public class Game {
     private void setNewScore() {
         String newPlayerName = "";
 
-        boolean canAdvance;
-
-        insertScoreText[4] = new Text(background.getX() + background.getWidth()/2 - 200,background.getY() + background.getHeight()/2 - 175, "Insert Name", "Dialog", 0, 50 );
-        insertScoreText[4].setColor(Color.WHITE);
+        insertScoreText[4] = new Text(background.getX() + background.getWidth()/2 - 200,background.getY() + background.getHeight()/2 - 175, "<Insert Name_> \n", "Dialog", 0, 40 );
+        insertScoreText[4].setColor(Color.LIGHT_GRAY);
         insertScoreText[4].draw();
 
 
@@ -179,8 +177,8 @@ public class Game {
 
             currChar = 65;
 
-            insertScoreText[i] = new Text(background.getX() + background.getWidth()/2 - 200 + i * 50, background.getY() + background.getHeight()/2 - 100, String.valueOf(currChar), "Dialog", 0, 50);
-            insertScoreText[i].setColor(Color.WHITE);
+            insertScoreText[i] = new Text(background.getX() + background.getWidth()/2 - 160 + i * 50, background.getY() + background.getHeight()/2 - 100, String.valueOf(currChar), "Dialog", 0, 50);
+            insertScoreText[i].setColor(Color.LIGHT_GRAY);
             insertScoreText[i].draw();
 
             menu.setCanAdvance(false);
@@ -195,8 +193,8 @@ public class Game {
 
         }
 
-        insertScoreText[5] = new Text(background.getX() + background.getWidth()/2 - 200,background.getY() + background.getHeight()/2 - 25, "Score Saved Successfully!", "Dialog", 0, 50 );
-        insertScoreText[5].setColor(Color.MAGENTA);
+        insertScoreText[5] = new Text(background.getX() + background.getWidth()/2 - 390,background.getY() + background.getHeight()/2 - 25, "<Score Saved Successfully!_>", "Dialog", 0, 50 );
+        insertScoreText[5].setColor(Color.LIGHT_GRAY);
         insertScoreText[5].draw();
 
         leaderboard.add(new PlayersLeaderboard(newPlayerName, score));
@@ -213,7 +211,6 @@ public class Game {
 
 
     private void checkGameOver() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-//////////////////////////////////////////////////////////////////////////////
         // Lose Game
         if (!player.isAlive()) {
             loseGame.playSound("/audio/gameOver.wav");
@@ -236,10 +233,12 @@ public class Game {
 
     private void updateMovement() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         player.move();
+
+        moveBalls();
+
         if (player.isShooting()) {
             player.getBullet().move();
         }
-        moveBalls();
 
     }
 

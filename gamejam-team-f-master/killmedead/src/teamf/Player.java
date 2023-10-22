@@ -28,7 +28,7 @@ public class Player implements KeyboardHandler {
     private double speed = 0.8;
 
 
-    public Player(Background background, ArrayList<Ball> balls) throws LineUnavailableException {
+    public Player(Background background, ArrayList<Ball> balls) {
 
         this.background = background;
         this.balls = balls;
@@ -208,9 +208,7 @@ public class Player implements KeyboardHandler {
                     isShooting = true;
                 }
 
-
                 break;
-
         }
     }
 

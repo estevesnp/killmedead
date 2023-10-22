@@ -42,7 +42,8 @@ public class Ball {
         }
     }
 
-    public void move() {
+    public synchronized
+    void move() {
 
         /*
         this.picture.translate(hSpeed, vSpeed);

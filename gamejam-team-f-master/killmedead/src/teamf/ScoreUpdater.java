@@ -24,23 +24,11 @@ public class ScoreUpdater implements Iterable<PlayersLeaderboard>{
 
         this.leaderboard = leaderboard;
 
-
     }
 
     public void readFromFile(){
 
         try {
-/*
-            InputStream inputStream = ClassLoader.getSystemClassLoader().getSystemResourceAsStream(filepath);
-            InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
-            bReader = new BufferedReader(streamReader);
- */
-
-/*
-            FileInputStream fis = new FileInputStream(filepath);
-            DataInputStream dis = new DataInputStream(fis);
-            bReader = new BufferedReader(new InputStreamReader(this.getResourceAsStream???(filepath)));
- */
 
             InputStream is = getClass().getResourceAsStream(filepath);
             bReader = new BufferedReader(new InputStreamReader(is));
@@ -90,13 +78,13 @@ public class ScoreUpdater implements Iterable<PlayersLeaderboard>{
 
         Collections.sort(leaderboard);
 
-        texts[0] = new Text(x, y, "Highscores:", "Dialog", 0, size);
-        texts[0].setColor(Color.WHITE);
+        texts[0] = new Text(x, y, "<HIGHSCORES_> \n", "Dialog\n", 0, 35);
+        texts[0].setColor(Color.LIGHT_GRAY);
         texts[0].draw();
 
         for (int i = 1; i < texts.length; i++) {
-            texts[i] = new Text(x, y + (i * size),leaderboard.get(i - 1).getName() + ": " + leaderboard.get(i - 1).getScore(),"Dialog", 0, size);
-            texts[i].setColor(Color.WHITE);
+            texts[i] = new Text(x, y + (i * size),leaderboard.get(i - 1).getName() + " " + leaderboard.get(i - 1).getScore(),"Dialog", 0, 27);
+            texts[i].setColor(new Color(129,129,129));
             texts[i].draw();
         }
     }
