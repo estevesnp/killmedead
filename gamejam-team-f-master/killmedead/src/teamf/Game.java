@@ -38,12 +38,16 @@ public class Game {
     private Sound winGame = new Sound();
     public static char currChar;
     private Text[] texts = new Text[6];
+    private Text[] insertScoreText = new Text[6];
 
     public Game() {
         Rectangle rectangle = new Rectangle(10, 10, 1845, 822);
         rectangle.fill();
         scoreUpdater = new ScoreUpdater(leaderboard);
         scoreUpdater.readFromFile();
+        menu = new Menu();
+        menu.init();
+
 
     }
 
@@ -51,7 +55,7 @@ public class Game {
 
         Text playerScore = new Text(0,0,"");
 
-        menu = new Menu(menuPath);
+        menu.setPicture(menuPath);
         menu.show();
 
 
@@ -60,7 +64,6 @@ public class Game {
                 break;
 
             case LOSE:
-
 
                 playerScore = new Text(background.getMaxX() - 500, 50, "YOUR SCORE: " + score, "Dialog", 0, 50);
                 playerScore.setColor(Color.WHITE);
@@ -72,10 +75,6 @@ public class Game {
                     setNewScore();
                 }
 
-                // check if player score
-
-
-
                 level = 1;
                 score = 0;
                 break;
@@ -86,6 +85,8 @@ public class Game {
                 break;
         }
 
+        menu.setGameStarted(false);
+
         while(!menu.gameStarted()) {
             try {
                 Thread.sleep(500);
@@ -93,6 +94,12 @@ public class Game {
         }
 
         for (Text text : texts) {
+            if (text != null) {
+                text.delete();
+            }
+        }
+
+        for (Text text : insertScoreText) {
             if (text != null) {
                 text.delete();
             }
@@ -160,33 +167,42 @@ public class Game {
 
     private void setNewScore() {
         String newPlayerName = "";
-        Text[] scoreName = new Text[4];
 
         boolean canAdvance;
+
+        insertScoreText[4] = new Text(background.getX() + background.getWidth()/2 - 200,background.getY() + background.getHeight()/2 - 175, "Insert Name", "Dialog", 0, 50 );
+        insertScoreText[4].setColor(Color.WHITE);
+        insertScoreText[4].draw();
 
 
         for (int i = 0; i < 4; i++) {
 
             currChar = 65;
 
-            canAdvance = false;
+            insertScoreText[i] = new Text(background.getX() + background.getWidth()/2 - 200 + i * 50, background.getY() + background.getHeight()/2 - 100, String.valueOf(currChar), "Dialog", 0, 50);
+            insertScoreText[i].setColor(Color.WHITE);
+            insertScoreText[i].draw();
 
-            scoreName[i] = new Text(background.getX() + background.getWidth()/2, background.getY() + background.getHeight()/2, String.valueOf(currChar), "Dialog", 0, 50);
-            scoreName[i].draw();
+            menu.setCanAdvance(false);
 
+            while(!menu.canAdvance()) {
 
-            while(!canAdvance) {
-
-
-                scoreName[i].setText(String.valueOf(currChar));
-
+                insertScoreText[i].setText(String.valueOf(currChar));
 
             }
 
-
-
+            newPlayerName += currChar;
 
         }
+
+        insertScoreText[5] = new Text(background.getX() + background.getWidth()/2 - 200,background.getY() + background.getHeight()/2 - 25, "Score Saved Successfully!", "Dialog", 0, 50 );
+        insertScoreText[5].setColor(Color.MAGENTA);
+        insertScoreText[5].draw();
+
+        leaderboard.add(new PlayersLeaderboard(newPlayerName, score));
+        Collections.sort(leaderboard);
+        leaderboard.remove(leaderboard.size()-1);
+
     }
 
 

@@ -27,7 +27,6 @@ public class Bullet {
         picture = new Picture(x, y, "Bell.png");
         picture.translate(0, -picture.getHeight());
         picture.draw();
-//////////////////////////////////////////////////////////////////////////
         bullet.playSound("/audio/bellDing.wav");
 
     }
@@ -56,7 +55,6 @@ public class Bullet {
     public boolean collideWithBall(Ball ball) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         int bulletHitBoxX = picture.getX() + (picture.getMaxX() - picture.getX())/2;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////7
         if ((ball.getX() <= bulletHitBoxX && bulletHitBoxX <= ball.getMaxX()) && (ball.getY() <= picture.getY() && picture.getY() <= ball.getMaxY())) {
             bubbleBurst.playSound("/audio/bubbleBurst.wav");
             Game.score += 20;

@@ -14,10 +14,13 @@ public class Menu implements KeyboardHandler {
     private boolean gameStarted = false;
     private boolean upPressed = false;
     private boolean downPressed = false;
+    private boolean canAdvance = false;
 
-    public Menu(String path) throws LineUnavailableException {
+    public Menu() {
+    }
+
+    public void setPicture(String path) {
         picture = new Picture(10, 10, path);
-        init();
     }
 
     public void show() {
@@ -31,26 +34,31 @@ public class Menu implements KeyboardHandler {
     public boolean gameStarted() {
         return this.gameStarted;
     }
+
+    public void setGameStarted(boolean bool) {
+        gameStarted = bool;
+    }
+
+    public boolean canAdvance() {
+        return canAdvance;
+    }
+
+    public void setCanAdvance(boolean bool) {
+        canAdvance = bool;
+    }
     public void nextChar() {
         if (Game.currChar != 90) {
             Game.currChar++;
-            System.out.println("next");
-            System.out.println(Game.currChar);
         }
     }
 
     public void previousChar() {
         if (Game.currChar != 65) {
             Game.currChar--;
-
-            System.out.println("previous");
-            System.out.println(Game.currChar);
         }
-
-
     }
 
-    private void init() {
+    public void init() {
         Keyboard keyboard = new Keyboard(this);
 
         KeyboardEvent pressedR = new KeyboardEvent();
@@ -65,17 +73,9 @@ public class Menu implements KeyboardHandler {
         pressedUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedUp.setKey(KeyboardEvent.KEY_UP);
 
-        KeyboardEvent releasedUp = new KeyboardEvent();
-        releasedUp.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-        releasedUp.setKey(KeyboardEvent.KEY_UP);
-
         KeyboardEvent pressedDown = new KeyboardEvent();
         pressedDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         pressedDown.setKey(KeyboardEvent.KEY_DOWN);
-
-        KeyboardEvent releasedDown = new KeyboardEvent();
-        releasedDown.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-        releasedDown.setKey(KeyboardEvent.KEY_DOWN);
 
         KeyboardEvent pressedEnter = new KeyboardEvent();
         pressedEnter.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -86,8 +86,6 @@ public class Menu implements KeyboardHandler {
         keyboard.addEventListener(pressedQ);
         keyboard.addEventListener(pressedUp);
         keyboard.addEventListener(pressedDown);
-        keyboard.addEventListener(releasedUp);
-        keyboard.addEventListener(releasedDown);
         keyboard.addEventListener(pressedEnter);
 
     }
@@ -103,18 +101,13 @@ public class Menu implements KeyboardHandler {
                 System.exit(0);
                 break;
             case KeyboardEvent.KEY_UP:
-                if (!upPressed) {
-                    upPressed = true;
                     nextChar();
-                }
                 break;
             case KeyboardEvent.KEY_DOWN:
-                if (!downPressed) {
-                    downPressed = true;
                     previousChar();
-                }
                 break;
             case KeyboardEvent.KEY_ENTER:
+                canAdvance = true;
                 break;
 
         }
@@ -122,15 +115,6 @@ public class Menu implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-        switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_UP:
-                upPressed = false;
-                break;
-            case KeyboardEvent.KEY_DOWN:
-                downPressed = false;
-                break;
 
-
-        }
     }
 }
